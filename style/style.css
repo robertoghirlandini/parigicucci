@@ -1,0 +1,398 @@
+/* ================== VARIABILI & BASE ================== */
+:root{
+  --bg:#f6f7f9;
+  --card:#ffffff;
+  --text:#111827;
+  --muted:#6b7280;
+  --primary:#2563eb;
+  --border:#e6e8eb;
+
+  /* colori bottoni arancio */
+  --btn:#E57C23;
+  --btn-dark:#CC6A1D;
+  --btn-hover:#F59E0B;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  font-family:"Open Sans","Segoe UI",Arial,Helvetica,sans-serif;
+  background: linear-gradient(120deg, #e0f2fe, #f9fafb);
+  color:var(--text);
+  line-height:1.65;
+  margin:0;
+  padding:32px;
+}
+
+/* Link */
+a{ color:var(--primary); text-decoration:none; }
+a:hover{
+  text-decoration:underline;
+  background: var(--primary);
+  color:#fff;
+  padding:3px 6px;
+  border-radius:4px;
+  transition: all .2s ease;
+}
+
+/* Immagini generiche (non le mappe) */
+img{
+  display:block;
+  margin:30px auto;
+  border:1px solid var(--border);
+  border-radius:10px;
+  max-width:500px;
+  box-shadow:0 6px 20px rgba(0,0,0,.08);
+}
+
+/* ================== NAVBAR STICKY ================== */
+.topbar{
+  position:sticky; top:0; z-index:50;
+  background:#ffffffcc; backdrop-filter: blur(6px);
+  display:flex; gap:12px; align-items:center;
+  padding:10px 14px; border:1px solid var(--border);
+  border-radius:10px; margin:0 auto 16px; max-width:980px;
+}
+.topbar a{ text-decoration:none; font-weight:600; }
+.topbar .right{ margin-left:auto; }
+
+/* ================== TITOLI ================== */
+h1{
+  font-size:36px;
+  background:#2563eb;
+  color:#fff;
+  padding:20px;
+  border-radius:8px;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+  text-align:center;
+  margin:0 0 30px 0;
+}
+h3{
+  margin:28px 0 10px;
+  font-size:22px;
+  color:var(--primary);
+}
+
+/* ================== LISTE GENERICHE (Ristoranti / Cibi) ================== */
+ol{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:18px 28px;
+  max-width:900px;
+  margin:18px auto;
+  box-shadow:0 8px 20px rgba(0,0,0,.05);
+}
+ol li{
+  margin-bottom:14px;
+  padding-bottom:10px;
+  border-bottom:1px dashed var(--border);
+}
+ol li:last-child{ border-bottom:none; }
+ol li strong{ color:var(--primary); }
+
+/* ================== BOTTONI ARANCIO ================== */
+.btnrow{ display:flex; gap:12px; margin-top:12px; flex-wrap:wrap; }
+
+.btn{
+  display:inline-block;
+  padding:12px 22px;
+  border-radius:999px;
+  background:var(--btn);
+  color:#fff;
+  border:1px solid var(--btn-dark);
+  text-decoration:none;
+  font-weight:600;
+  font-size:16px;
+  letter-spacing:.3px;
+  box-shadow:0 6px 14px rgba(0,0,0,.15);
+  transition: all .2s ease;
+}
+.btn:hover{
+  background:var(--btn-hover);
+  border-color:var(--btn-dark);
+  transform: translateY(-2px);
+  box-shadow:0 8px 18px rgba(0,0,0,.2);
+}
+.btn:active{ transform: translateY(1px); box-shadow:0 3px 8px rgba(0,0,0,.15); }
+
+.btn.outline{
+  background:transparent;
+  color:var(--btn);
+  border:2px solid var(--btn);
+  box-shadow:none;
+}
+.btn.outline:hover{
+  background:var(--btn);
+  color:#fff;
+  box-shadow:0 6px 14px rgba(0,0,0,.15);
+}
+
+/* ================== SEZIONE "LUOGHI" (seconda <ol>) ================== */
+/* Timeline verticale */
+body > ol:nth-of-type(2){
+  position:relative;
+  list-style:none;
+  padding-left:26px;
+}
+body > ol:nth-of-type(2)::before{
+  content:"";
+  position:absolute; left:12px; top:16px; bottom:16px;
+  width:2px; background:var(--border);
+}
+
+/* Card giorno: testo | mappa */
+body > ol:nth-of-type(2) > li{
+  position:relative;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:16px 18px;
+  margin:16px 0;
+  box-shadow:0 6px 14px rgba(0,0,0,.08);
+
+  display:grid;
+  grid-template-columns: 1fr 220px;  /* sinistra testo | destra mappa */
+  gap:20px;
+  align-items:center;
+}
+
+/* pallino timeline */
+body > ol:nth-of-type(2) > li::before{
+  content:"";
+  position:absolute; left:-19px; top:24px;
+  width:12px; height:12px; border-radius:50%;
+  background:var(--primary);
+  box-shadow:0 0 0 3px #fff;
+}
+
+/* Badge "Primo giorno" ecc. */
+body > ol:nth-of-type(2) p strong{
+  display:inline-block;
+  background:#eaf2ff;
+  color:var(--primary);
+  border:1px solid #d9e6ff;
+  padding:4px 8px;
+  border-radius:999px;
+  margin-bottom:6px;
+}
+/* Contenitore mappa aderente, senza spazio sopra */
+.map-container {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  margin-top: 8px;           /* piccolo respiro dal testo sopra */
+}
+
+.map-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: none;
+  border-radius: 0;          /* aderente */
+  margin: 0;
+  box-shadow: none;
+}
+
+/* Bottone centrato sopra la mappa */
+.map-btn {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--btn);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.map-btn:hover {
+  background: var(--btn-hover);
+  transform: translate(-50%, -2px);
+}
+
+
+/* ================== FOOTER ================== */
+footer{
+  margin-top:30px; text-align:center; font-size:14px;
+  color:var(--muted); padding-top:10px; border-top:1px solid var(--border);
+}
+
+/* ================== PULSANTE "TORNA SU" ================== */
+.back-to-top{
+  position:fixed; right:20px; bottom:20px;
+  display:inline-block; padding:10px 14px;
+  background:var(--primary); color:#fff;
+  border-radius:999px; text-decoration:none; font-weight:600;
+  box-shadow:0 6px 16px rgba(0,0,0,.12);
+  transition: opacity .2s ease;
+}
+.back-to-top:hover{ opacity:.85; }
+
+/* ================== RESPONSIVE ================== */
+@media (max-width:800px){
+  body{ padding:16px; }
+  h1{ font-size:28px; }
+  ol{ padding:16px; }
+
+  /* Luoghi: una colonna su mobile */
+  body > ol:nth-of-type(2) > li{ grid-template-columns:1fr; }
+  .map-container{ max-width:100%; margin:10px auto 0; }
+  .map-btn{ bottom:12px; left:50%; transform: translateX(-50%); }
+}
+/* ---- GALLERIA CIBO ---- */
+.food-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  max-width: 900px;
+  margin: 24px auto;
+  padding: 10px;
+}
+
+.food-gallery img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.food-gallery img:hover {
+  transform: scale(1.06);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+}
+/* — Navigazione fluida + ancore che non finiscono sotto la topbar — */
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 90px; }
+
+/* — Hover link senza spostare il testo (evita il cambio padding) — */
+a:hover{
+  text-decoration: underline;
+  background: transparent;   /* niente sfondo per evitare salti */
+  color: var(--primary);
+  padding: 0;                 /* elimina lo shift */
+}
+
+/* — Stato focus visibile per accessibilità tastiera — */
+a:focus-visible, .btn:focus-visible, .map-btn:focus-visible {
+  outline: 3px solid rgba(37,99,235,.35);
+  outline-offset: 2px;
+}
+
+/* — Mappa: dimensione coerente per tutti i giorni — */
+.map-container {
+  min-height: 260px;        /* leggermente più alta: 4° giorno più pieno */
+}
+@media (max-width: 800px){
+  .map-container { min-height: 200px; }
+}
+
+/* — Immagine mappa: nessun bordo/ombra ereditati — */
+.map-container img{
+  margin: 0;                /* sovrascrive il margin globale di img */
+  border: 0;
+  box-shadow: none;
+}
+
+/* — Bottoni: effetto più “clicky” e focus coeso — */
+.btn, .map-btn {
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
+}
+.btn:active, .map-btn:active {
+  transform: translateY(0);       /* evita rimbalzo eccessivo su mobile */
+}
+
+/* — Galleria: rapporto coerente e più compatta su schermi piccoli — */
+.food-gallery img {
+  aspect-ratio: 4 / 3;            /* proporzione uniforme */
+}
+@media (max-width: 500px){
+  .food-gallery { gap: 12px; }
+  .food-gallery img { aspect-ratio: 16 / 10; }
+}
+
+/* — Prestazioni/comfort: riduci animazioni per chi lo chiede — */
+@media (prefers-reduced-motion: reduce){
+  * { animation: none !important; transition: none !important; }
+}
+/* --- Reveal on scroll --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .45s ease, transform .45s ease;
+  will-change: opacity, transform;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* piccola sfumatura diversa per le card mappa e le foto */
+.map-container.reveal,
+.food-gallery img.reveal {
+  transform: translateY(18px) scale(.98);
+}
+.map-container.reveal.visible,
+.food-gallery img.reveal.visible {
+  transform: none;
+}
+
+/* Rispetto per chi preferisce meno animazioni */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+}
+/* ---- SEZIONE CONTATTI ---- */
+.contact-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px 28px;
+  max-width: 900px;
+  margin: 40px auto;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  text-align: center;
+}
+
+.contact-section h3 {
+  margin-bottom: 12px;
+  color: var(--primary);
+}
+
+.contact-section p {
+  margin: 6px 0;
+  color: var(--text);
+}
+
+.contact-box {
+  margin-top: 12px;
+  background: #f9fafb;
+  padding: 18px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.contact-section a {
+  color: var(--btn);
+  font-weight: 600;
+}
+
+.contact-section a:hover {
+  background: var(--btn);
+  color: white;
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
